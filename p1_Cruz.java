@@ -25,10 +25,11 @@ void draw()
   scene();
   sunmove();
   sunshow();
-  house();  
+  setting();  
   minmove();    // Don't forget to move it!
   minshow();
   nugshow();
+  chasenug();
   msg();
   
 }
@@ -46,14 +47,71 @@ void scene()
 
 
 // House on horizon (150).
-void house()
+void setting()
+/////House
+
 { 
   fill( 250,100,0 );                // Orange
   rectMode (CENTER);
   rect( 335, horizon-40, 150,130,7 );       
   fill( 129, 3, 26);                // Maroon
   triangle( 235,horizon-100, 435,horizon-100, 335,5 );
+/////Window 1
+  fill(255,255,255);                
+  rect(290, horizon-70, 40,40,7);
+/////Window 2
+  fill(255,255,255);                
+  rect(380, horizon-70, 40,40,7);
+/////Door
+  fill(0);                
+  rect(335, horizon-8, 55,65,7);
+
+
+/////Trees
+  
+  fill(103, 79, 65);                 //Trunk1
+  rectMode (CENTER);
+  rect(500, horizon-30, 20,60);
+  
+  fill(124, 209, 107);               //Leaf1
+  ellipseMode(CENTER);
+  ellipse(500, horizon-70, 50, 80); 
+  
+  
+  fill(103, 79, 65);                 //Trunk3
+  rectMode (CENTER);
+  rect(560, horizon-30, 20,60);
+  
+  fill(104, 129, 57);               //Leaf3
+  ellipseMode(CENTER);
+  ellipse(560, horizon-70, 50, 80); 
+  
+  fill(103, 79, 65);                 //Trunk2
+  rectMode (CENTER);
+  rect(530, horizon-30, 20,60);
+  
+  fill(184, 229, 157);               //Leaf2
+  ellipseMode(CENTER);
+  ellipse(530, horizon-70, 50, 80); 
+  
+  
+  fill(103, 79, 65);                 //Trunk4
+  rectMode (CENTER);
+  rect(100, horizon-30, 40,60);
+  
+  fill(55, 216, 24);                  //Leaf4
+  triangle(50, horizon-55, 100, horizon-125, 150, horizon-55);
+  triangle(50, horizon-85, 100, horizon-140, 150, horizon-85);
+  triangle(55, horizon-110, 100, horizon-165, 145, horizon-110);
 }
+
+
+
+/////Trees
+
+
+
+
 void sunmove()                        ///sun move
 {
   sunY=75;
@@ -77,7 +135,7 @@ void minmove()
 void sunshow()                            ///sun show
 {
   ellipseMode(CENTER);
-  fill(255, 255, 0);                      ///Yellow Sun
+  fill(255, 177, 8);                      ///Yellow Sun
   ellipse( sunX, sunY, 90, 90 );
 }
   
@@ -85,7 +143,7 @@ void nugshow()                           ////Nugget show
 {
  
   ellipseMode(CENTER);
-  fill(255, 155, 120);
+  fill(152, 118, 43);
   ellipse(nugX, nugY, 60,30);
 
 
@@ -124,14 +182,15 @@ void mousePressed()  {
 }
 
 void chasenug(){
-if (nugX >= xMin+10) {
-  nugX= random(600);
-}
+if ((xMin > nugX-10) || (yMin > nugY-10)) { 
+    nugX = random(0, 600);
+    nugY = random(0, 400);
   
   
   
    
 
+}
 }
 
 
