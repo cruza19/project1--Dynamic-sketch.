@@ -1,5 +1,4 @@
-//// Project 1b - Dynamic sketch.
-////   Hero chases golden egg, monster chases hero.
+//// Project 1t - Dynamic sketch, with trees.
 
 String title="Project #1 -- Hero chases the gold, while Monster chases Hero";
 String author="Bruce Alan Martin; 2016/2/29";
