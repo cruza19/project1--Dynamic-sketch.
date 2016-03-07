@@ -50,6 +50,7 @@ void scene() {
   tree( 400, 40, 200 );
   tree( 450, 50, 100 );
   tree( 500, 60, 150 );
+  tree( 550, 70, 50 );
   // ++++ ADD CODE HERE +++
 }
 void tree(  ) {
