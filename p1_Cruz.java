@@ -6,6 +6,9 @@ float nugX, nugY;
 float sunX, sunY;
 float xMin=200, yMin=200, dxMin=3, dyMin=2;
 float horizon;
+float nugR;
+float nugG;
+float nugB;
 int score=1;
 
 
@@ -48,7 +51,7 @@ void scene()
 
 // House on horizon (150).
 void setting()
-/////House
+  /////House
 
 { 
   fill( 250, 100, 0 );                // Orange
@@ -140,11 +143,17 @@ void sunshow()                            ///sun show
 
 void nugshow()                           ////Nugget show
 {
-
-  stroke(0);
+  nugR=random(255);
+  nugG=random(255);
+  nugB=random(255);
+  noStroke();
   ellipseMode(CENTER);
-  fill(152, 118, 43);
-  ellipse(nugX, nugY, 75, 65);
+  fill(nugR, nugG, nugB);
+  ellipse(nugX, nugY, 25, 25);
+  ellipse(nugX-17, nugY, 12, 10);
+  ellipse(nugX+17, nugY, 12, 10);
+  ellipse(nugX, nugY-17, 10, 12);
+  ellipse(nugX, nugY+17, 10, 12);
 }
 /// Minion
 void minshow()
@@ -170,29 +179,32 @@ void eyes()
   fill(0);
   ellipse( xMin-10, yMin-50, 14, 14);     //eye balls
   ellipse( xMin+10, yMin-50, 14, 14);
+
+  textSize(15);                              //name
+  fill(106, 255, 234);
+  text("Minion", xMin-20, yMin+45);
 }  
 
 
 ////EVENTS
-void mousePressed() {
+void mousePressed() {          ///nug appears on click
   nugX= mouseX;
   nugY= mouseY;
 }
 
 void chasenug() {
 
-  if (dist(xMin, yMin, nugX, nugY) < 25) { 
+  if (dist(xMin, yMin, nugX, nugY) < 25) {   ///Minion chasing nugget
     nugX= random(10, 650);
     nugY = random(10, 400);
     score = score+1;
   }
 }
- void out(){
-   if (score==10 || key=='q') {
-     exit();
-   }
-   
- }
+void out() {                        //// quit after 10 times the creature eats the nugget
+  if (score==10 || key=='q') {
+    exit();
+  }
+}
 /// MESSAGES
 void msg()
 {
@@ -203,6 +215,6 @@ void msg()
   fill( 0, 0, 0 );
   text( "Abel Cruz", 10, height-10 );
   textSize(20);
-  fill(250,50,0);
+  fill(250, 50, 0);
   text(score, 650, horizon-220);
 }  
