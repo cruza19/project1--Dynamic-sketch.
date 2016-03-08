@@ -1,0 +1,154 @@
+//Nanette CST112
+//Project 1 hero chases gold
+
+float x,y;                          // Position of hero and sun
+float xSun, ySun;  
+float horizon;
+float xSam = 0, ySam = 0;
+float xGold = random (50, width-50);
+float yGold = random (horizon+50, height-50);
+float dxSam = 4, dySam = 6;
+int score = 1;
+
+
+//SETUP: define screen size//
+void setup()
+{
+       size (600, 600 );
+       x = 0;
+       y = 0;      
+       xSun=  width/2;                  // Reset the sun position.
+       ySun=  100;
+       horizon = height/3;
+       frameRate = 30;
+       xSam = xSam + dxSam;
+       dxSam = (xGold - xSam) / frameRate;
+       xGold = random (50, width-50);
+       yGold = random (horizon+50, height-50);
+}
+
+//DRAW: sky, ground, house, tree, sun//
+void draw()
+{
+  scene();
+  
+                   
+  
+  
+// ACTION: 
+
+
+
+     //MOVE SUN
+    {
+            xSun=  xSun + 1;
+            if (xSun > width) xSun=  0;  
+    }
+    moveSam();
+    
+ 
+    
+    //SAM:
+    {   
+    fill ( 250, 50, 250 );                                        //body
+    rect (xSam+25, ySam+100, 80, 80 );
+    fill (0);                                                     //name
+    text ("SAM",  50, 350 );    
+    fill ( 204, 0, 204 );                                         //head
+    ellipse (xSam+65, ySam+70, 60, 60 );
+    fill ( 204, 0, 204 );                                         //left leg
+    ellipse ( xSam+45, ySam+185, 20, 10 );
+    fill ( 204, 0, 204 );                                         //right leg
+    ellipse ( xSam+85, ySam+185, 20, 10 );
+    fill ( 255, 255, 255 );                                       //left eye
+    ellipse ( xSam+50, ySam+70, 10, 20 );
+    fill ( 255, 255, 255 );                                       //right eye
+    ellipse ( xSam+80, ySam+70, 10, 20 );
+    fill ( 0, 0, 0 );                                            //left pupil
+    ellipse ( xSam+50, ySam+70, 5, 5 );
+    fill ( 0, 0, 0 );                                             //right pupil
+    ellipse ( xSam+80, ySam+70, 5, 5 );
+   
+ //GOLD NUGGET:
+
+{  
+  stroke (255,255, 0 );
+  fill (255, 255, 0 );
+  triangle ( xGold+00, yGold+00, xGold+20, yGold+00, xGold+10, yGold+10 );
+  stroke (255, 255, 0 );
+  fill (255, 255, 0 );
+  triangle ( xGold+0, yGold+05, xGold+20, yGold+05, xGold+10, yGold-5 );
+}
+//MESSAGES: title and author  
+  {
+    fill(255, 255, 255);
+    text ("Hero chases gold", 10, 20 );
+    fill (0);
+    text ("Nanette, CST112", 10, height -10 );
+    text ("SCORE", 410, height -10 );
+    
+  }
+    }
+    
+} 
+
+  //SCENE:
+  void scene()
+  {           
+        noStroke ();
+        background ( 0, 75, 255 );          //sky            
+        fill ( 0, 255, 0 );
+        rect ( x, horizon, width, 600 );    //green ground
+        stroke (255, 255, 0 );
+        fill (255, 255, 0 );
+        ellipse( xSun, ySun, 50, 50 );      //sun
+        fill (165, 42, 42 );                //tree trunk
+        stroke( 165, 42, 42 );
+        rect  ( 450, horizon-50, 20, 50);
+        fill (0, 127, 0 );                  //tree leaves
+        stroke( 0, 127, 0 );
+        ellipse ( 460, horizon-80, 60, 60 ); 
+
+                 
+        stroke( 0, 0, 0 );                                                  //brown roof house
+        fill (165, 42, 42 );                         
+        triangle ( 100, horizon-100, 200, horizon-150, 300, horizon-100 );   
+        fill ( 50, 50, 200 );                                               //blue base house
+        rect (125, horizon-100, 150, 100 );                  
+        fill ( 255, 0, 0 );                                                 //red door
+        rect ( 160,horizon-50, 35,50 );                     
+        fill (0, 0, 0 );
+        ellipse( 170, horizon-25, 5, 5 );                                   //door knob
+        fill ( 255, 255, 255 );                                             //windows
+        rect (220, horizon-75, 35, 35 );
+        stroke( 0, 0, 0 );
+        line (238, horizon-75, 238, horizon-40 );
+        line (220, horizon-57, 255, horizon-57 );
+         
+  }
+
+void moveSam() 
+    //MOVE SAM
+    {
+            // Go for the gold!
+            dxSam=  (xGold -xSam) / 30;
+            dySam=  (yGold -ySam) / 30;
+            // Move him.
+            xSam = xSam + dxSam;   
+            ySam = ySam + dySam;
+            // Check for gold nearby.
+            if (dist(xSam, ySam, xGold, yGold) < 5)
+            {
+              score=  score + 100;
+              background(0);
+              xGold=  random( 0, width );
+              yGold=  random( horizon, height );
+            }
+    }
+
+//MOVE GOLD  when mouse clicked.
+void mousePressed() {
+    
+     xGold = mouseX;
+     yGold = mouseY;
+}
