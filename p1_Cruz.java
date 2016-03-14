@@ -201,7 +201,7 @@ void chasenug() {
 
   if (dist(xMin, yMin, nugX, nugY) < 25) {   ///Minion chasing nugget
     nugX= random(10, 650);
-    nugY = random(10, 400);
+    nugY = random(horizon, 400);
     score = score+1;
   }
 }
